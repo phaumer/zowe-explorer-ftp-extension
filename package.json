@@ -1,0 +1,49 @@
+{
+	"name": "vscode-extension-for-zowe-api-sample",
+	"displayName": "Zowe Explorer Extensibility Examples",
+	"publisher": "ibm",
+	"description": "Demonstrates how to extend the Zowe Explorer using its extensibility API.",
+	"version": "1.2.0",
+	"repository": {},
+	"engines": {
+		"vscode": "^1.38.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:extension.activateExtender"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.activateExtender",
+				"title": "Zowe: Activate FTP Support"
+			}
+		]
+	},
+	"extensionDependencies": [
+		"Zowe.vscode-extension-for-zowe"
+	],
+	"scripts": {
+		"vscode:prepublish": "npm run build",
+		"build": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "package": "vsce package"
+	},
+	"dependencies": {
+		"@brightside/core": "^2.36.0",
+		"@zowe/zos-ftp-for-zowe-cli": "../zowe-cli-ftp-plugin/zowe-zos-ftp-for-zowe-cli-0.1.1.tgz",
+		"tmp": "0.1.0"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.1",
+		"@types/node": "^10.12.21",
+		"@types/vscode": "^1.38.0",
+		"@types/tmp": "0.1.0",
+		"glob": "^7.1.4",
+		"typescript": "^3.7.3",
+		"tslint": "^5.20.1"
+	}
+}
