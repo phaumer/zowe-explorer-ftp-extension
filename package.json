@@ -29,12 +29,12 @@
 	"scripts": {
 		"vscode:prepublish": "npm run build",
 		"build": "tsc -p ./",
-        "watch": "tsc -watch -p ./",
-        "package": "vsce package"
+		"watch": "tsc -watch -p ./",
+		"package": "vsce package"
 	},
 	"dependencies": {
 		"@brightside/core": "^2.36.0",
-		"@zowe/zos-ftp-for-zowe-cli": "../zowe-cli-ftp-plugin/zowe-zos-ftp-for-zowe-cli-0.1.1.tgz",
+		"@zowe/zos-ftp-for-zowe-cli": "../zowe-cli-ftp-plugin/zowe-zos-ftp-for-zowe-cli-0.1.2.tgz",
 		"tmp": "0.1.0"
 	},
 	"devDependencies": {
