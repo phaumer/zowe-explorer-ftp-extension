@@ -19,6 +19,7 @@ import * as imperative from "@brightside/imperative";
 export namespace ZoweVscApi {
     /**
      * Common interface shared between all API interfaces offered by this extension.
+     * @export
      */
     export interface ICommon {
 
@@ -41,7 +42,6 @@ export namespace ZoweVscApi {
     /**
      * API for providing a USS Rest handler to the extension.
      * @export
-     * @interface IUss
      */
     export interface IUss extends ICommon {
         /**
@@ -134,7 +134,10 @@ export namespace ZoweVscApi {
         ): Promise<zowe.IZosFilesResponse>;
     }
 
-    // TODO
+    /**
+     * API for providing am MVS Rest handler to the extension.
+     * @export
+     */
     export interface IMvs extends ICommon {
 
         /**
@@ -188,7 +191,7 @@ export namespace ZoweVscApi {
         ): Promise<zowe.IZosFilesResponse>;
 
         /**
-         * Create a new data set with the sepecified options.
+         * Create a new data set with the specified options.
          *
          * @param {zowe.CreateDataSetTypeEnum} cmdType
          * @param {string} dataSetName
@@ -240,7 +243,7 @@ export namespace ZoweVscApi {
         ): Promise<zowe.IZosFilesResponse>;
 
         /**
-         * Renamces a data set member.
+         * Renames a data set member.
          *
          * @param {string} dataSetName
          * @param {string} beforeMemberName
@@ -268,8 +271,8 @@ export namespace ZoweVscApi {
     }
 
     /**
-     * This interface can be used by other VS Code Extensions to register themselved
-     * with additonal API implementations. The other extension would implement one or
+     * This interface can be used by other VS Code Extensions to register themselves
+     * with additional API implementations. The other extension would implement one or
      * more interfaces above, for example ZoweVscMyAppUssRestApi, and register it with
      * the object returned by this extensions activate() method as shown below.
      *
@@ -290,7 +293,6 @@ export namespace ZoweVscApi {
      * }
      *
      * @export
-     * @interface IApiRegister
      */
     export interface IApiRegister {
 

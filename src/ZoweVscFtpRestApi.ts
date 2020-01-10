@@ -39,11 +39,11 @@ export class ZoweVscFtpUssRestApi implements ZoweVscApi.IUss {
                 throw new Error("Internal error: ZoweVscFtpUssRestApi instance was not initialized with a valid Zowe profile.");
             }
             this.session = new imperative.Session({
-                hostname: ftpProfile!.host,
-                port: ftpProfile!.port,
-                user: ftpProfile!.user,
-                password: ftpProfile!.password,
-                rejectUnauthorized: ftpProfile!.rejectUnauthorized,
+                hostname: ftpProfile.host,
+                port: ftpProfile.port,
+                user: ftpProfile.user,
+                password: ftpProfile.password,
+                rejectUnauthorized: ftpProfile.rejectUnauthorized,
             });
         }
         return this.session;
