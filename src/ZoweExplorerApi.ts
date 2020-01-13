@@ -16,7 +16,7 @@ import * as imperative from "@brightside/imperative";
  * This namespace provides interfaces for all the external APIs provided by this VS Code Extension.
  * Other VS Code Extension can implement these and use the IApiRegister interface to register themselves.
  */
-export namespace ZoweVscApi {
+export namespace ZoweExplorerApi {
     /**
      * Common interface shared between all API interfaces offered by this extension.
      * @export
@@ -28,13 +28,16 @@ export namespace ZoweVscApi {
 
         /**
          * Return the type name of the CLI profile supported by this api.
+         * @returns {string} the type name as defined by a CLI plugin that implements the profile.
          */
         getProfileTypeName(): string;
 
         /**
          * Create a session for the specific profile type
-         * @param profile {imperative.IProfileLoaded} profile reference
-         * @returns {imperative.Session} a Zowe CLI Session reference
+         * @param {imperative.IProfileLoaded} profile
+         *      optional profile reference,
+         *      will use the profile the API was retrieved with by default
+         * @returns {imperative.Session} a Zowe CLI Session
          */
         getSession(profile?: imperative.IProfileLoaded): imperative.Session;
     }
@@ -273,18 +276,18 @@ export namespace ZoweVscApi {
     /**
      * This interface can be used by other VS Code Extensions to register themselves
      * with additional API implementations. The other extension would implement one or
-     * more interfaces above, for example ZoweVscMyAppUssRestApi, and register it with
+     * more interfaces above, for example MyZoweExplorerAppUssRestApi, and register it with
      * the object returned by this extensions activate() method as shown below.
      *
      * Sample code:
      *
      * // see if Zowe Explorer is installed and retrieve the API Registry\
-     * const baseExt = extensions.getExtension('zowe.vscode-extension-for-zowe');\
-     * if (baseExt && baseExt.exports) {\
-     *   // Cast the returned object to the IApiRegister interface\
-     *   const importedApi: ZoweVscApi.IApiRegister = baseExt.exports;\
+     * const explorerApi = extensions.getExtension('zowe.vscode-extension-for-zowe');\
+     * if (explorerApi && explorerApi.exports) {\
+     *   // Cast the returned object to the IApiRegisterClient interface\
+     *   const importedApi: ZoweExplorerApi.IApiRegisterClient = explorerApi.exports;\
      *   // create an instance of my API and register it with Zowe Explorer\
-     *   importedApi.registerUssApi(new ZoweVscMyAppUssRestApi());\
+     *   importedApi.registerUssApi(new MyZoweExplorerAppUssRestApi());\
      *   window.showInformationMessage(\
      *     'Zowe Explorer was augmented for MyApp support. Please, refresh your explorer views.');\
      *   } else {\
@@ -294,7 +297,7 @@ export namespace ZoweVscApi {
      *
      * @export
      */
-    export interface IApiRegister {
+    export interface IApiRegisterClient {
 
         /**
          * Register a new implementation of the USS Api.
@@ -306,8 +309,8 @@ export namespace ZoweVscApi {
 
         /**
          * Lookup of an API for USS for a given profile.
-         * @param {string} profileType
-         * @returns the registered API instance
+         * @param {imperative.IProfileLoaded} profile
+         * @returns the registered API instance for the given profile
          */
         getUssApi(profile: imperative.IProfileLoaded): IUss;
 

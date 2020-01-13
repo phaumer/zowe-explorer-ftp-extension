@@ -15,14 +15,14 @@ import * as tmp from "tmp";
 import * as zowe from "@brightside/core";
 import * as imperative from "@brightside/imperative";
 
-import { ZoweVscApi } from "./IZoweVscRestApis";
+import { ZoweExplorerApi } from "./ZoweExplorerApi";
 // tslint:disable: no-submodule-imports
 import { IZosFTPProfile } from "@zowe/zos-ftp-for-zowe-cli/lib/api/doc/IZosFTPProfile";
 import { FTPConfig } from "@zowe/zos-ftp-for-zowe-cli/lib/api/FTPConfig";
 import { StreamUtils } from "@zowe/zos-ftp-for-zowe-cli/lib/api/StreamUtils";
 import { CoreUtils } from "@zowe/zos-ftp-for-zowe-cli/lib/api/CoreUtils";
 
-export class ZoweVscFtpUssRestApi implements ZoweVscApi.IUss {
+export class FtpUssRestApi implements ZoweExplorerApi.IUss {
 
     public static getProfileTypeName(): string {
         return "zftp";
@@ -50,7 +50,7 @@ export class ZoweVscFtpUssRestApi implements ZoweVscApi.IUss {
     }
 
     public getProfileTypeName(): string {
-        return ZoweVscFtpUssRestApi.getProfileTypeName();
+        return FtpUssRestApi.getProfileTypeName();
     }
 
     public async fileList(path: string): Promise<zowe.IZosFilesResponse> {
