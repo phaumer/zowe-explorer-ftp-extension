@@ -22,7 +22,7 @@ import { FTPConfig } from "@zowe/zos-ftp-for-zowe-cli/lib/api/FTPConfig";
 import { StreamUtils } from "@zowe/zos-ftp-for-zowe-cli/lib/api/StreamUtils";
 import { CoreUtils } from "@zowe/zos-ftp-for-zowe-cli/lib/api/CoreUtils";
 
-export class FtpUssRestApi implements ZoweExplorerApi.IUss {
+export class FtpUssApi implements ZoweExplorerApi.IUss {
 
     public static getProfileTypeName(): string {
         return "zftp";
@@ -50,7 +50,7 @@ export class FtpUssRestApi implements ZoweExplorerApi.IUss {
     }
 
     public getProfileTypeName(): string {
-        return FtpUssRestApi.getProfileTypeName();
+        return FtpUssApi.getProfileTypeName();
     }
 
     public async fileList(path: string): Promise<zowe.IZosFilesResponse> {

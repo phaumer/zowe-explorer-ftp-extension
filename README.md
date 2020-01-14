@@ -48,6 +48,6 @@ This example is using the Zowe FTP CLI plugin as a dependency to provide FTP cap
 
 TBD, but the rough steps would be:
 
-- Copy the file `src/IZoweVscRestApis.ts`
-- Implement classes that implement any of the `IMvs`, `IUss` interfaces.
+- Copy the file `src/ZoweExplorerAPI.ts`
+- Implement classes that implement any of the `IMvs`, `IUss`, `IJes` interfaces.
 - Implement a registration method similar to `registerFtpApi()` in `extension.ts` that queries the Zowe Explorer API and calls the registration method.
