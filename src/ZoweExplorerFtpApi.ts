@@ -10,6 +10,7 @@
 */
 
 import * as fs from "fs";
+import * as path from "path";
 import * as crypto from "crypto";
 import * as tmp from "tmp";
 import * as zowe from "@brightside/core";
@@ -166,8 +167,6 @@ export class FtpUssApi implements ZoweExplorerApi.IUss {
     }
 
     public async delete(fileName: string, recursive?: boolean): Promise<zowe.IZosFilesResponse> {
-        // TODO: Extend FTP CLI Plugin to support "recursive"
-        // https://github.com/zowe/zowe-cli-ftp-plugin/issues/35
         const result: zowe.IZosFilesResponse = {
             success: false,
             commandResponse: "Could not get a valid FTP connection.",
@@ -175,7 +174,11 @@ export class FtpUssApi implements ZoweExplorerApi.IUss {
         };
         const connection = await this.ftpClient(this.checkedProfile());
         if (connection) {
-            await connection.deleteDataset(fileName);
+            if (recursive) {
+                await this.deleteDirectory(fileName, connection);
+            } else {
+                await connection.deleteDataset(fileName);
+            }
             result.success = true;
             result.commandResponse = "Delete completed.";
 
@@ -183,6 +186,19 @@ export class FtpUssApi implements ZoweExplorerApi.IUss {
             throw new Error(result.commandResponse);
         }
         return result;
+    }
+
+    private async deleteDirectory(ussFile: string, connection: any): Promise<any> {
+        const files = await connection.listDataset(ussFile) as any[];
+        for (const file of files) {
+            const filePath = path.join(ussFile, file.name);
+            if (file.isDirectory) {
+                await this.deleteDirectory(filePath, connection);
+            } else {
+                await connection.deleteDataset(filePath);
+            }
+        }
+        await connection.deleteDataset(ussFile);
     }
 
     public async rename(oldFilePath: string, newFilePath: string): Promise<zowe.IZosFilesResponse> {
