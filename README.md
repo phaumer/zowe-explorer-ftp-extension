@@ -17,10 +17,9 @@ This example currently works against the following branch of Zowe Explorer: <htt
 
 ### Build this extension
 
-This example is using the Zowe FTP CLI plugin as a dependency to provide FTP capabilities. Unfortunately, that plugin has not been released to npmjs or bintray, yet. You need to build it locally.
+This example is using the Zowe FTP CLI plugin as a dependency to provide FTP capabilities.
 
-- Clone the FTP CLI plugin repo: `git clone git@github.com:zowe/zowe-cli-ftp-plugin.git`
-- Build the FTP CLI plugin: `npm install && npm run build && npm pack && npm run installPlugin`
+- Go to the Zowe FTP CLI Plugin repos for instructions for how to install it: <https://github.com/zowe/zowe-cli-ftp-plugin>
 - Create Zowe CLI FTP profile: `zowe profiles create zftp <profile name> -H <host> -u <user> -p <password> -P <port>`
 - Clone this repo in a parallel directory: `git clone git@github.com:phaumer/vscode-extension-for-zowe-api-sample.git`
 - Build `npm install && npm run build && npm run package`
