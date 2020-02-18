@@ -2,6 +2,7 @@
 	"name": "vscode-extension-for-zowe-api-sample",
 	"displayName": "Zowe Explorer Extensibility Example",
 	"publisher": "ibm",
+	"license": "SEE LICENSE IN LICENSE.txt",
 	"description": "Demonstrates how to extend the Zowe Explorer using its extensibility API. Adds zFTP support to Zowe Explorer.",
 	"version": "1.2.2",
 	"icon": "zowe_logo.png",
