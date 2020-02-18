@@ -13,9 +13,7 @@ import { ZoweExplorerApi } from './ZoweExplorerApi';
 import { FtpUssApi } from './ZoweExplorerFtpApi';
 
 export function activate(context: vscode.ExtensionContext) {
-    context.subscriptions.push(vscode.commands.registerCommand('extension.activateExtender', () => {
         registerFtpApi();
-    }));
 }
 
 /**
