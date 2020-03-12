@@ -1,16 +1,17 @@
 {
-	"name": "vscode-extension-for-zowe-api-sample",
-	"displayName": "Zowe Explorer Extensibility Example",
-	"publisher": "ibm",
-	"license": "SEE LICENSE IN LICENSE.txt",
-	"description": "Demonstrates how to extend the Zowe Explorer using its extensibility API. Adds zFTP support to Zowe Explorer.",
-	"version": "1.2.2",
+	"name": "zowe-explorer-ftp-extension",
+	"displayName": "Zowe Explorer Extension for FTP",
+	"publisher": "Zowe",
+	"author": "Zowe",
+	"license": "EPL-2.0",
+	"description": "Adds zFTP support to Zowe Explorer demonstrating how to extend the Zowe Explorer using its extensibility API.",
+	"version": "1.3.1",
 	"icon": "zowe_logo.png",
 	"repository": {
-		"url": "https://github.com/phaumer/vscode-extension-for-zowe-api-sample"
+		"url": "https://github.com/phaumer/zowe-explorer-ftp-extension"
 	},
 	"engines": {
-		"vscode": "^1.38.0"
+		"vscode": "^1.43.0"
 	},
 	"categories": [
 		"Other"
@@ -30,17 +31,17 @@
 		"package": "vsce package"
 	},
 	"dependencies": {
-		"@brightside/core": "^2.36.0",
-		"@zowe/zos-ftp-for-zowe-cli": "1.0.0",
+		"@zowe/cli": "6.8.2",
+		"@zowe/zos-ftp-for-zowe-cli": "1.0.1",
 		"tmp": "0.1.0"
 	},
 	"devDependencies": {
 		"@types/glob": "^7.1.1",
-		"@types/node": "^10.12.21",
-		"@types/vscode": "^1.38.0",
+		"@types/node": "^10.17.17",
+		"@types/vscode": "^1.43.0",
 		"@types/tmp": "0.1.0",
-		"glob": "^7.1.4",
-		"typescript": "^3.7.5",
-		"tslint": "6.0.0"
+		"glob": "^7.1.6",
+		"typescript": "^3.8.3",
+		"tslint": "6.1.0"
 	}
 }

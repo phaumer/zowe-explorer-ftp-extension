@@ -1,16 +1,16 @@
 /*
-* This program and the accompanying materials are made available under the terms of the *
-* Eclipse Public License v2.0 which accompanies this distribution, and is available at *
-* https://www.eclipse.org/legal/epl-v20.html                                      *
-*                                                                                 *
-* SPDX-License-Identifier: EPL-2.0                                                *
-*                                                                                 *
-* Copyright Contributors to the Zowe Project.                                     *
-*                                                                                 *
-*/
+ * This program and the accompanying materials are made available under the terms of the *
+ * Eclipse Public License v2.0 which accompanies this distribution, and is available at *
+ * https://www.eclipse.org/legal/epl-v20.html                                      *
+ *                                                                                 *
+ * SPDX-License-Identifier: EPL-2.0                                                *
+ *                                                                                 *
+ * Copyright Contributors to the Zowe Project.                                     *
+ *                                                                                 *
+ */
 
-import * as zowe from "@brightside/core";
-import * as imperative from "@brightside/imperative";
+import * as zowe from '@zowe/cli';
+import { IProfileLoaded, Session } from '@zowe/imperative';
 
 /**
  * This namespace provides interfaces for all the external APIs provided by this VS Code Extension.
@@ -22,9 +22,8 @@ export namespace ZoweExplorerApi {
      * @export
      */
     export interface ICommon {
-
         /** The profile associated with a specific instance of an API.  */
-        profile?: imperative.IProfileLoaded;
+        profile?: IProfileLoaded;
 
         /**
          * Return the type name of the CLI profile supported by this api.
@@ -36,12 +35,12 @@ export namespace ZoweExplorerApi {
         /**
          * Create a session for the specific profile type.
          *
-         * @param {imperative.IProfileLoaded} profile
+         * @param {IProfileLoaded} profile
          *      optional profile reference,
          *      will use the profile the API was retrieved with by default
-         * @returns {imperative.Session} a Zowe CLI Session
+         * @returns {Session} a Zowe CLI Session
          */
-        getSession(profile?: imperative.IProfileLoaded): imperative.Session;
+        getSession(profile?: IProfileLoaded): Session;
     }
 
     /**
@@ -58,9 +57,7 @@ export namespace ZoweExplorerApi {
          *     as well as the list of results in apiResponse.items with
          *     minimal properties name, mode.
          */
-        fileList(
-            ussFilePath: string
-        ): Promise<zowe.IZosFilesResponse>;
+        fileList(ussFilePath: string): Promise<zowe.IZosFilesResponse>;
 
         /**
          * Check th USS chtag to see if a file requires conversion.
@@ -68,9 +65,7 @@ export namespace ZoweExplorerApi {
          * @param {string} ussFilePath
          * @returns {Promise<boolean>}
          */
-        isFileTagBinOrAscii(
-            ussFilePath: string
-        ): Promise<boolean>;
+        isFileTagBinOrAscii(ussFilePath: string): Promise<boolean>;
 
         /**
          * Retrieve the contents of a USS file.
@@ -81,7 +76,7 @@ export namespace ZoweExplorerApi {
         getContents(
             ussFilePath: string,
             options: zowe.IDownloadOptions
-        ): Promise<zowe.IZosFilesResponse> ;
+        ): Promise<zowe.IZosFilesResponse>;
 
         /**
          * Uploads the file at the given path. Use for Save.
@@ -127,13 +122,13 @@ export namespace ZoweExplorerApi {
          *      Either "file" or "directory".
          * @param {string} [mode]
          *      An optional Unix string representation of the permissions.
-         * @returns {Promise<string>}
+         * @returns {Promise<zowe.IZosFilesResponse>}
          */
         create(
             ussPath: string,
             type: string,
             mode?: string
-        ): Promise<string>;
+        ): Promise<zowe.IZosFilesResponse>;
 
         /**
          * Deletes the USS directory or file at the given path.
@@ -165,7 +160,6 @@ export namespace ZoweExplorerApi {
      * @export
      */
     export interface IMvs extends ICommon {
-
         /**
          * Get a list of data sets that match the filter pattern.
          *
@@ -251,9 +245,15 @@ export namespace ZoweExplorerApi {
          * @returns {Promise<zowe.IZosFilesResponse>}
          */
         copyDataSetMember(
-            { dataSetName: fromDataSetName, memberName: fromMemberName }: zowe.IDataSet,
-            { dataSetName: toDataSetName, memberName: toMemberName }: zowe.IDataSet,
-            options?: {replace?: boolean}
+            {
+                dataSetName: fromDataSetName,
+                memberName: fromMemberName
+            }: zowe.IDataSet,
+            {
+                dataSetName: toDataSetName,
+                memberName: toMemberName
+            }: zowe.IDataSet,
+            options?: { replace?: boolean }
         ): Promise<zowe.IZosFilesResponse>;
 
         /**
@@ -279,8 +279,16 @@ export namespace ZoweExplorerApi {
         renameDataSetMember(
             dataSetName: string,
             currentMemberName: string,
-            newMemberName: string,
+            newMemberName: string
         ): Promise<zowe.IZosFilesResponse>;
+
+        /**
+         * Migrates a data set member.
+         *
+         * @param {string} dataSetName
+         * @returns {Promise<zowe.IZosFilesResponse>}
+         */
+        hMigrateDataSet(dataSetName: string): Promise<zowe.IZosFilesResponse>;
 
         /**
          * Deletes a data set or data set member.
@@ -318,9 +326,7 @@ export namespace ZoweExplorerApi {
          * @param {string} jobid
          * @returns {Promise<zowe.IJob>}
          */
-        getJob(
-            jobid: string
-        ): Promise<zowe.IJob>;
+        getJob(jobid: string): Promise<zowe.IJob>;
 
         /**
          * Returns spool file meta-data for a job.
@@ -329,10 +335,7 @@ export namespace ZoweExplorerApi {
          * @param {string} jobid
          * @returns {Promise<zowe.IJobFile[]>}
          */
-        getSpoolFiles(
-            jobname: string,
-            jobid: string
-        ): Promise<zowe.IJobFile[]>;
+        getSpoolFiles(jobname: string, jobid: string): Promise<zowe.IJobFile[]>;
 
         /**
          * Retrieves spool file content as specified in the parms
@@ -365,9 +368,7 @@ export namespace ZoweExplorerApi {
          * @param {zowe.IJob} job
          * @returns {Promise<string>}
          */
-        getJclForJob(
-            job: zowe.IJob
-        ): Promise<string>;
+        getJclForJob(job: zowe.IJob): Promise<string>;
 
         /**
          * Submits a job with the JCL provided returning job meta-data.
@@ -390,9 +391,7 @@ export namespace ZoweExplorerApi {
          * @returns {Promise<zowe.IJob>}
          * @memberof IJes
          */
-        submitJob(
-            jobDataSet: string
-        ): Promise<zowe.IJob>;
+        submitJob(jobDataSet: string): Promise<zowe.IJob>;
 
         /**
          * Cancels and purges a job identified by name and id.
@@ -402,10 +401,7 @@ export namespace ZoweExplorerApi {
          * @returns {Promise<void>}
          * @memberof IJes
          */
-        deleteJob(
-            jobname: string,
-            jobid: string
-        ): Promise<void>;
+        deleteJob(jobname: string, jobid: string): Promise<void>;
     }
 
     /**
@@ -433,7 +429,6 @@ export namespace ZoweExplorerApi {
      * @export
      */
     export interface IApiRegisterClient {
-
         /**
          * Register a new implementation of the USS Api.
          * See example in Interface docs.
@@ -444,10 +439,10 @@ export namespace ZoweExplorerApi {
 
         /**
          * Lookup of an API for USS for a given profile.
-         * @param {imperative.IProfileLoaded} profile
+         * @param {IProfileLoaded} profile
          * @returns the registered API instance for the given profile
          */
-        getUssApi(profile: imperative.IProfileLoaded): IUss;
+        getUssApi(profile: IProfileLoaded): IUss;
 
         /**
          * Register a new implementation of the MVS Api.
@@ -462,7 +457,7 @@ export namespace ZoweExplorerApi {
          * @param {string} profile
          * @returns the registered API instance
          */
-        getMvsApi(profile: imperative.IProfileLoaded): IMvs;
+        getMvsApi(profile: IProfileLoaded): IMvs;
 
         /**
          * Register a new implementation of the JES Api.
@@ -477,6 +472,6 @@ export namespace ZoweExplorerApi {
          * @param {string} profile
          * @returns the registered API instance
          */
-        getJesApi(profile: imperative.IProfileLoaded): IJes;
+        getJesApi(profile: IProfileLoaded): IJes;
     }
 }
