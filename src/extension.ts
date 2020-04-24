@@ -28,6 +28,9 @@ function registerFtpApi(): boolean {
         const importedApi: ZoweExplorerApi.IApiRegisterClient =
             zoweExplorerApi.exports;
         importedApi.registerUssApi(new FtpUssApi());
+        if (importedApi.reloadProfiles) {
+            importedApi.reloadProfiles();
+        }
         vscode.window.showInformationMessage(
             "Zowe Explorer was modified for FTP support. Please, refresh your Zowe Explorer's USS tree view and add FTP CLI Profiles."
         );
