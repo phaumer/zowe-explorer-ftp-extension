@@ -32,7 +32,7 @@ function registerFtpApi(): boolean {
             importedApi.reloadProfiles();
         }
         vscode.window.showInformationMessage(
-            "Zowe Explorer was modified for FTP support. Please, refresh your Zowe Explorer's USS tree view and add FTP CLI Profiles."
+            "Zowe Explorer was modified for FTP support."
         );
         return true;
     }
