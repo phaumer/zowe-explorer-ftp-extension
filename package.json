@@ -33,6 +33,7 @@
 	"dependencies": {
 		"@zowe/cli": "6.10.1",
 		"@zowe/zos-ftp-for-zowe-cli": "1.0.2",
+		"vscode-nls": "4.1.1",
 		"tmp": "0.1.0"
 	},
 	"devDependencies": {

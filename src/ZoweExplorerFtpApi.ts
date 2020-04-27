@@ -16,13 +16,12 @@ import * as tmp from 'tmp';
 import * as zowe from '@zowe/cli';
 import * as imperative from '@zowe/imperative';
 
-import { ZoweExplorerApi } from './ZoweExplorerApi';
+import { ZoweExplorerApi } from './api/ZoweExplorerApi';
 // tslint:disable: no-submodule-imports
 import { IZosFTPProfile } from '@zowe/zos-ftp-for-zowe-cli/lib/api/doc/IZosFTPProfile';
 import { FTPConfig } from '@zowe/zos-ftp-for-zowe-cli/lib/api/FTPConfig';
 import { StreamUtils } from '@zowe/zos-ftp-for-zowe-cli/lib/api/StreamUtils';
 import { CoreUtils } from '@zowe/zos-ftp-for-zowe-cli/lib/api/CoreUtils';
-
 export class FtpUssApi implements ZoweExplorerApi.IUss {
     public static getProfileTypeName(): string {
         return 'zftp';

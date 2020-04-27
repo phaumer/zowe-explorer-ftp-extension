@@ -9,7 +9,7 @@
  *                                                                                 *
  */
 import * as vscode from 'vscode';
-import { ZoweExplorerApi } from './ZoweExplorerApi';
+import { ZoweExplorerApi } from './api/ZoweExplorerApi';
 import { FtpUssApi } from './ZoweExplorerFtpApi';
 
 export function activate(context: vscode.ExtensionContext) {
@@ -28,8 +28,8 @@ function registerFtpApi(): boolean {
         const importedApi: ZoweExplorerApi.IApiRegisterClient =
             zoweExplorerApi.exports;
         importedApi.registerUssApi(new FtpUssApi());
-        if (importedApi.reloadProfiles) {
-            importedApi.reloadProfiles();
+        if (importedApi.getExplorerExtenderApi().reloadProfiles) {
+            importedApi.getExplorerExtenderApi().reloadProfiles();
         }
         vscode.window.showInformationMessage(
             "Zowe Explorer was modified for FTP support."
