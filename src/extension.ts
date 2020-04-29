@@ -28,7 +28,9 @@ function registerFtpApi(): boolean {
         const importedApi: ZoweExplorerApi.IApiRegisterClient =
             zoweExplorerApi.exports;
         importedApi.registerUssApi(new FtpUssApi());
-        if (importedApi.getExplorerExtenderApi()?.reloadProfiles) {
+        // check as getExplorerExtenderApi().reloadProfiles() was add in Zowe Explorer 1.5 only
+        if (importedApi.getExplorerExtenderApi &&
+            importedApi.getExplorerExtenderApi().reloadProfiles) {
             importedApi.getExplorerExtenderApi().reloadProfiles();
         }
         vscode.window.showInformationMessage(

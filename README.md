@@ -33,9 +33,8 @@ This example is using the Zowe FTP CLI plugin as a dependency to provide FTP cap
 ## Using the FTP Extension
 
 - Start VS Code with the extension installed or via the `<F5>` out of the development workspace as described above.
-- A message will be shown telling you that activation was successful and that you need to refresh the USS Explorer.
-- Do that by click the Refresh icon.
-- Then click the `+` icon and you will see your Zowe FTP profile listed in the drop-down.
+- A message will be shown telling you that activation was successful.
+- Click the `+` icon and you will see your Zowe FTP profile listed in the drop-down.
 - Select it and it will appear in the USS Explorer.
 - Click the Search icon next to it to specify a USS path to list it.
 - Try opening and saving files.

@@ -1,5 +1,10 @@
 # Change Log
 
+## Version 1.5
+
+- Updated to API changes in Zowe Explorer 1.5.
+- No need to click Refresh anymore after activation to see the ftp profiles.
+
 ## Version 1.3.1
 
 - Updates to support Zowe Explorer 1.3.1 with Zowe CLI 6.8.2.
