@@ -20,7 +20,7 @@ export function activate(context: vscode.ExtensionContext) {
  * Function that searches for the Zowe VS Code Extension and if found
  * registers the additional USS API implementation provided by this extension.
  */
-function registerFtpApi(): boolean {
+async function registerFtpApi(): Promise<boolean> {
     const zoweExplorerApi = vscode.extensions.getExtension(
         'Zowe.vscode-extension-for-zowe'
     );
@@ -31,7 +31,7 @@ function registerFtpApi(): boolean {
         // check as getExplorerExtenderApi().reloadProfiles() was add in Zowe Explorer 1.5 only
         if (importedApi.getExplorerExtenderApi &&
             importedApi.getExplorerExtenderApi().reloadProfiles) {
-            importedApi.getExplorerExtenderApi().reloadProfiles();
+            await importedApi.getExplorerExtenderApi().reloadProfiles();
         }
         vscode.window.showInformationMessage(
             "Zowe Explorer was modified for FTP support."
